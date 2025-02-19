@@ -1,5 +1,18 @@
 import { useState } from 'react';
+import {styled} from 'styled-components';
+//instead of assigning the "invalid class " we assign it for styled.input (basically the input component)
+const Input = styled.input `
+  
+  width: 100%;
+  padding: 0.75rem 1rem;
+  line-height: 1.5;
+  background-color: #d1d5db;
+  color: ${({invalid}) => invalid? '#f87171' : '#6b7280' } ;
+  border: 1px solid transparent;
+  border-radius: 0.25rem;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
 
+`
 export default function AuthInputs() {
   const [enteredEmail, setEnteredEmail] = useState('');
   const [enteredPassword, setEnteredPassword] = useState('');
@@ -25,7 +38,7 @@ export default function AuthInputs() {
       <div className="controls">
         <p>
           <label>Email</label>
-          <input
+          <Input
             type="email"
             className={emailNotValid ? 'invalid' : undefined}
             onChange={(event) => handleInputChange('email', event.target.value)}
@@ -33,7 +46,7 @@ export default function AuthInputs() {
         </p>
         <p>
           <label>Password</label>
-          <input
+          <Input
             type="password"
             className={passwordNotValid ? 'invalid' : undefined}
             onChange={(event) =>
