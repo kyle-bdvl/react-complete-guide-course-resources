@@ -1,3 +1,5 @@
+import {useFetch} from '../hooks/useFetch.js';
+
 export default function Places({
   title,
   places,
