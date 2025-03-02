@@ -1,11 +1,14 @@
-export default function SidebarButtons ({projects}){
+export default function SidebarButtons ({projects ,title}){
+
 
   return(
-    <div>
-      {projects.map((title,index)=>{
-          return <button key={index}>{title.title}</button>
+    <div className="flex flex-col items-center">
+      <h2 className="font-bold text-sky-800">Buttons</h2>
+      {projects.map((project,index)=>{
+          return <button onClick={()=>title(project.title)} key={index}>{project.title}</button>
       ;})
       }
+      
     </div>
     
   );

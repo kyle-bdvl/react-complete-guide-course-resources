@@ -1,4 +1,4 @@
-import { useRef, useState , useEffect } from 'react';
+import { useRef, useState , useEffect, useCallback } from 'react';
 import { sortPlacesByDistance } from './loc.js';
 import Places from './components/Places.jsx';
 import { AVAILABLE_PLACES } from './data.js';
@@ -42,6 +42,7 @@ function App() {
     setIsOpen(false);
   }
 
+  
   function handleSelectPlace(id) {
     setPickedPlaces((prevPickedPlaces) => {
       if (prevPickedPlaces.some((place) => place.id === id)) {
@@ -58,7 +59,8 @@ function App() {
     localStorage.setItem('selectedPlaces',JSON.stringify([id, ...storedIds]));
     }
   }
-
+  //creates a constant. It stores it interally in its memory.
+  const handleRemovePlace= useCallback(
   function handleRemovePlace() {
     setPickedPlaces((prevPickedPlaces) =>
       prevPickedPlaces.filter((place) => place.id !== selectedPlace.current)
@@ -66,8 +68,11 @@ function App() {
     setIsOpen(false);
 
     const storedIds = JSON.parse(localStorage.getItem('selectedPlaces')) || [];
-    localStorage.setItem('selectedPlaces', JSON.stringify(storedIds.filter((id)=> id !== selectedPlace.current)));
-  }
+    localStorage.setItem(
+      'selectedPlaces', 
+      JSON.stringify(storedIds.filter((id)=> id !== selectedPlace.current))
+    );
+  },[]);
 
   return (
     <>

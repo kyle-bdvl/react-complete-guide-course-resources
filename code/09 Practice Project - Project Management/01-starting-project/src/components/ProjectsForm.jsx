@@ -3,7 +3,7 @@ import {useState} from 'react';
 export default function ProjectsForm({fillUpForm}){ 
   const[title,setTitle] = useState("");
   const[description,setDescription] = useState("");
-  const[dueDate,setDueDate] = useState(null);
+  const[dueDate,setDueDate] = useState("");
 
   function handleTitle(event){
     setTitle(event.target.value);

@@ -11,6 +11,8 @@ import { fetchUserPlaces, updateUserPlaces } from './http.js';
 
 function App() {
   const selectedPlace = useRef();
+  const [isFetching, setIsFetching] = useState(false);
+  const [error,setError] = useState();
 
   const [userPlaces, setUserPlaces] = useState([]);
 
@@ -20,9 +22,17 @@ function App() {
 
   useEffect(()=>{
     async function fetchPlaces(){
-      await fetchUserPlaces();
+      setIsFetching(true);
+      try{
+        const places = await fetchUserPlaces();
+        setUserPlaces(places);
+      }
+      catch(error){
+        setError({message:error.message} || "failed to fetch user PLaces");
+      }
+      setIsFetching(false)
     }
-    
+
     fetchPlaces()
   },[]);
 
@@ -98,12 +108,16 @@ function App() {
         </p>
       </header>
       <main>
-        <Places
+        {error && <Error title="An error occurred!" message={error.message}/>}
+        {!error && (<Places
           title="I'd like to visit ..."
+          isLoading={isFetching}
+          loadingText="Fetching your places..."
           fallbackText="Select the places you would like to visit below."
           places={userPlaces}
           onSelectPlace={handleStartRemovePlace}
-        />
+        />)
+        }
 
         <AvailablePlaces onSelectPlace={handleSelectPlace} />
       </main>
