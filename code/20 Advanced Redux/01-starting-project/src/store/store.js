@@ -5,9 +5,10 @@ const initialCartState = {
 }
 const cartStoreReducer = (state = initialCartState, action) => {
 	const itemIndex = state.cartItem.findIndex(item=> item.title === action.title);
+	
 	if (action.type === 'increment') {
 		if(itemIndex === -1){
-			// console.log(itemIndex);
+			 
 			return {
 				cartItem: [...state.cartItem, action.item],
         cartIsOpen:state.cartIsOpen
@@ -44,7 +45,9 @@ const cartStoreReducer = (state = initialCartState, action) => {
       cartIsOpen: !state.cartIsOpen
     }
   }
+	
 	return (state);
+	
 }
 const cartStore = legacy_createStore(cartStoreReducer);
 export default cartStore;

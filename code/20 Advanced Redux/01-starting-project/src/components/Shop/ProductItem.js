@@ -7,6 +7,7 @@ const ProductItem = (props) => {
 
   function handleClick(){ 
     dispatch({type:'increment',title, item:{title,description,quantity:1,price}})
+    
   }
   return (
     <li className={classes.item}>

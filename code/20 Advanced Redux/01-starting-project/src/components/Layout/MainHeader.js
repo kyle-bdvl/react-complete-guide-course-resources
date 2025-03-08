@@ -3,10 +3,12 @@ import classes from './MainHeader.module.css';
 import { useSelector } from 'react-redux';
 const MainHeader = (props) => {
   const cartItem = useSelector(state=>state.cartItem)
-  let counter =0;
+  let counter = 0
   cartItem.map((item)=>{
     counter = counter + item.quantity
   })
+  
+
   return (
     
     <header className={classes.header}>
