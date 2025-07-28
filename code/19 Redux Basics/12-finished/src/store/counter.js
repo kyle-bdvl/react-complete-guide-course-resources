@@ -12,6 +12,7 @@ const counterSlice = createSlice({
     decrement(state) {
       state.counter--;
     },
+    // payload is a default name and it takes anything inside the parameter
     increase(state, action) {
       state.counter = state.counter + action.payload;
     },

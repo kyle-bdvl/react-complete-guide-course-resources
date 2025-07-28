@@ -5,7 +5,8 @@ const initialAuthState = {
 };
 
 const authSlice = createSlice({
-  name: 'authentication',
+  //the name here is redundant || for documentation
+  name: 'authentication', 
   initialState: initialAuthState,
   reducers: {
     login(state) {
